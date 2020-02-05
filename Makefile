@@ -21,5 +21,5 @@ run:
 		-it \
 		--rm \
 		-v $(PWD):/app:rw \
-		-p 8080:8888 \
+		-p 8888:8888 \
 		alicorp/jupyterlab:1.0
