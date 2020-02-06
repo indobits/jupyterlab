@@ -1,7 +1,7 @@
 -SHELL:=/bin/sh
 export DOCKER_BUILDKIT=1
 
-docker-install:
+install:
 	sudo apt remove containerd docker docker-engine docker.io runc -y || true
 	sudo apt update -y
 	sudo apt install apt-transport-https ca-certificates curl gnupg2 software-properties-common -y
@@ -16,10 +16,20 @@ docker-install:
 	su - $(USER)
 
 run:
-	docker build . -f Dockerfile -t alicorp/jupyterlab:1.0
+	docker build . -f Dockerfile -t alicorp/jupyterlab:1.0 --no-cache=False
 	docker run \
 		-it \
 		--rm \
 		-v $(PWD):/app:rw \
 		-p 8888:8888 \
 		alicorp/jupyterlab:1.0
+
+bash:
+	docker build . -f Dockerfile -t alicorp/jupyterlab:1.0 --no-cache=False
+	docker run \
+		-it \
+		--rm \
+		-v $(PWD):/app:rw \
+		-p 8888:8888 \
+		alicorp/jupyterlab:1.0 \
+		bash

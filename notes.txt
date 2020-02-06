@@ -1,0 +1,23 @@
+repository:
+-----------
+
+sudo apt update
+sudo apt upgrade
+sudo apt install git make
+git clone https://github.com/indobits/jupyterlab.git
+
+config:
+-------
+
+make bash
+jupyter notebook --generate-config
+jupyter notebook password
+cat /root/.jupyter/jupyter_notebook_config.json
+
+run:
+----
+
+cd jupyterlab
+make install
+cd jupyterlab
+make run

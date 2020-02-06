@@ -16,9 +16,8 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-CMD jupyter lab \
-  --ip 0.0.0.0 \
-  --port 8888 \
-  --no-browser \
-  --allow-root \
-  --NotebookApp.token=''
+CMD openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+	-keyout certificates/cert.key \
+	-out certificates/cert.pem \
+	-subj '/C=PE/ST=Lima/L=Lima/O=indobits/OU=factory/CN=indobits.com' && \
+	jupyter lab --config .jupyter/config.py
